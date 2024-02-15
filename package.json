@@ -1,0 +1,25 @@
+{
+  "name": "reactjs",
+  "version": "1.0.0",
+  "description": "This is a React tutorial.",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ReactJS"
+  },
+  "author": "Suman Bharati",
+  "license": "ISC",
+  "devDependencies": {
+    "parcel": "^2.11.0",
+    "process": "^0.11.10"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "browserslist": [
+    "last 2 versions"
+  ]
+}

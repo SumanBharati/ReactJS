@@ -1,0 +1,78 @@
+NPM - Its not an abbreviation for node package manager, however it manages packages. Its a repository for all the packages. Whatever library or utility we need for our app comes from npm and npm manages them.
+
+How to make our app use npm or configure npm?
+- npm init
+- now it will ask few questions,
+  > package name: We can provide any name
+  > version: We can keep the suggested version
+  > description: Anything
+  > entry point: We can go with the suggested default value, however generally the entry point is index.html. Remove this App.js default value from package.json when building for production otherwise it will throw an error.
+  > test command: We can give jest
+  > git repository: Any
+  > keywords: Any keywords
+  > author: Anything
+  > license: ISC (default)
+- PACKAGE.JSON - After all this, we get package.json file which is a configuration for our npm. Whatever packages/dependencies our application is dependent on is managed by npm, and all of those are configured inside package.json. It keeps a track of what version of the package/dependency is installed into our system.
+
+The most important package is a BUNDLER.
+BUNDLER - When we have multiple HTML, CSS, and JS files, our whole code needs to go through minification, chuncking, caching, cleaning, compression to be production ready, to be sent to production, and a bundler helps us do all these things. Bundler basically bundles/packages our app properly to be shipped to production.
+Eg: Webpack, Parcel, Vite
+create-react-app behind the scenes use Webpack as bundler.
+
+PARCEL - 
+To have Parcel, we will install this dependency via 'npm install -D parcel'.
+In the above install command -D stands for dev.
+There are basically 2 types of dependencies, 
+- normal: These are used in production besides other normal uses
+- dev (-D): These are generally required in developement phase, when we are developing our app
+Features of Parcel: 
+- Dev Build
+- Local Server
+- Hot Reloading/HMR - Hot Module replacement (So as soon as we save something, parcel is building the project)
+- File Watching Algorithm - written in C++
+- (Subsequent) Faster builds because of Caching (A folder gets created named .parcel-cache)
+- Image optimisation
+- Minification of file in Production
+- Compress
+- Bundles
+- Consistant Hashing
+- Code Splitting
+- Differential Bundling - supports older browsers meaning we have different bundles for different browsers.
+- Diagnostics
+- Error Handling
+- HTTPs - Lets us host our app on https too (one example: npx parcel index.html --https)
+- Tree Shaking - remove unused code
+- Different dev and prod bundlers - prod build has more optimization compared to dev, thus prod build takes more times than dev build.
+Parcel is fast because it has .parcel-cache.
+Parcel alone is not responsible for all these powers, it is doing these with the help of other libraries/dependencies.
+We can read more about Parcel from Parcel.org
+
+Now once the parcel is installed, we see that our package.json file is updated with a devDependency.
+And we can see a caret(^) symbol in front of the version of parcel inside devDependency. Caret basically denoted that in future if the dependency/package undergoes minor version change, let's say from 2.8.3 to 2.8.4, caret will automatically update the dependency/package too.
+We have tilde(~) symbol too, which updates the dependency/package with major version update, let's say from 2.8.3 to 3.8.3. But this is not generally recommended as our app might misbehave in some situations as a result of this version update because of tilde.
+
+PACKAGE-LOCK.JSON - We can now see a new file named package-lock.json, this files keep track of EXACT version of all the packages/dependencies and transitive dependencies. Package.json keeps track of the approximate version, package.json can have caret or tilde but package-lock.json will show the exact version along with hash(integrity) and other details.
+
+NODE MODULES - When we did npm install, a node modules folder gets created which contains all the code fetched from npm. This is like a database, it keeps the actual data about the packages/dependencies installed from npm. It keep all the data of all the dependencies.
+
+TRANSITIVE DEPENDENCY:
+Till now we only installed parcel, but we can have questions about why there are so many other things besides parcel inside node modules. It is because parcel itself has some other dependencies and those dependencies can internally have other dependencies.
+
+There are multiple package.json files inside our project. We can clearly see one outside, but others are inside node module's individual dependency/library/package.
+
+As a good practice we should always put package.json and package-lock.json onto git and never ever put node modules folder to production or github. 
+Node modules folder is too too big in size and we already have package.json and package-lock.json so we can re-install it any time with 'npm install'. Whatever we can re-generate on server we should never put that on git, we should only put the essential things. 
+We prefer to put node modules inside .gitignore file.
+
+'npx parcel index.html' - This way parcel has hoisted our app on server with port 1234. Parcel has created a server for our app.
+We have used npx here instead of npm. This is beacuse we wanted to execute our package, npm as a part of command is used when we want to install a package but npx let's us execute the installed package.
+So what is happening here is, parcel goes to the source index.html and builds a development build for our app, and it hosts that development build onto localhost:1234. And thats how we are able to access our app on localhost:1234.
+
+We know that we can bring React and ReactDOM to our app by using CDN links, but with the use of npm too we can do this and that would be more preffered way because there in case of CDN we were getting these from unpkg.com by making a network call and this can be a costly opertion too. But we already have these in our node modules so why make a new network call. 
+And the version is also fixed in each commond, so in future if new version comes up it would be difficult to maintain in case of CDN links, however with npm, we can easily maintain the versions inside package.json.
+
+DIST - When we execute parcel by running npx parcel index.html (or) npx parcel build index.html, parcel generates development/production build of our project, and it puts it up into the dist folder. So the content on the browser is coming from the dist and .parcel-cache folders and not from our written code.
+The dist and .parcel-cache folders are created on each build so they can be deleted and re-generated in subsequent builds, therefore they also need not be put onto git and we can keep them in .gitignore file.
+
+BROWSERSLIST - To make our app compatible in older versions of browsers we need browserslist package. We will put browserslist as an array containg list of browsers inside package.json and it will work on the browsers we want. Parcel alongwith browserslist package takes care of this. 
+We can read more about browserslist from browserslist.dev.
