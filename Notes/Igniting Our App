@@ -49,7 +49,7 @@ We can read more about Parcel from Parcel.org
 
 Now once the parcel is installed, we see that our package.json file is updated with a devDependency.
 And we can see a caret(^) symbol in front of the version of parcel inside devDependency. Caret basically denoted that in future if the dependency/package undergoes minor version change, let's say from 2.8.3 to 2.8.4, caret will automatically update the dependency/package too.
-We have tilde(~) symbol too, which updates the dependency/package with major version update, let's say from 2.8.3 to 3.8.3. But this is not generally recommended as our app might misbehave in some situations as a result of this version update because of tilde.
+We have tilda(~) symbol too, which updates the dependency/package with major version update, let's say from 2.8.3 to 3.8.3. But this is not generally recommended as our app might misbehave in some situations as a result of this version update because of tilda.
 
 PACKAGE-LOCK.JSON - We can now see a new file named package-lock.json, this files keep track of EXACT version of all the packages/dependencies and transitive dependencies. Package.json keeps track of the approximate version, package.json can have caret or tilde but package-lock.json will show the exact version along with hash(integrity) and other details.
 

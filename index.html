@@ -11,8 +11,11 @@
     <!-- <div>I'm above the root div.</div> -->  
     <div id="root">
       <!-- root.render in App.js file replaces pre-existing content inside this div with id of root, for example here h1 tag content will be replaced by heading from App.js. -->
-      <!-- <h1>Hello World from HTML.</h1> -->
+      <!-- <h1>Hello World from HTML(index.html file).</h1> -->
     </div>
+
+
+    <!-- JavaScript inside HTML -->
     <!-- <script>
       const heading = document.createElement("h1");
       heading.innerHTML = "Hello World from JavaScript.";
@@ -20,6 +23,9 @@
       const root = document.getElementById("root");
       root.appendChild(heading);
     </script> -->
+
+
+    <!-- CDN links to get react into our application -->
     <!-- <script
       crossorigin
       src="https://unpkg.com/react@18/umd/react.development.js"
@@ -28,15 +34,18 @@
       crossorigin
       src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
     ></script> -->
+
+
     <script type="module" src="./App.js"></script>
+
+
+    <!-- React inside HTML -->
+    <!-- Line no.47 - We are creating a react element at,i.e., a normal JS object via React.createElement. -->
+    <!-- Line no.48 - Then we need to have a root where all the DOM manipulations will be done, a root where the rendering will happen. And that is done via ReactDOM.createRoot -->
+    <!-- Line no.49 - The render method here takes up the JS object, convert it into HTML that the browser understands and put it in root -->
     <!-- <script>
-      //We are creating a react element,i.e., a normal JS object via React.createElement
       const heading = React.createElement("h1", {}, "Hello World from React.");
-
-      //We need to have a root where all the DOM manipulations will be done, a root where the rendering will happen. And that is done via ReactDOM.createRoot
       const root = ReactDOM.createRoot(document.getElementById("root"));
-
-      //The render method here takes up the JS object, convert it into HTML that the browser understands and put it in root
       root.render(heading);
     </script> -->
   </body>

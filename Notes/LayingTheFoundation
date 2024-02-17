@@ -1,0 +1,112 @@
+NPM SCRIPTS - We can configure scripts or shorter commands to execute dev build or prod build by writting few scripts inside package.json's scripts section, such as,
+- For starting a build in development we can write, "start": "parcel index.html". We can name the script whatever we want, here we have used 'start'.
+- For starting a build in production, we can write, "build": "build parcel index.html". We can name the script whatever we want, here we have used 'build'.
+And now we can simply do 'npm run start'/'npm start' instead of 'npx parcel index.html' for dev build, and 'npm run build' instead of 'npx build parcel index.html' for a prod build.
+
+
+
+
+REACT ELEMENT - These are simple JS objects, and when rendered onto the DOM it becomes HTML elements.
+Example: const heading = React.createElement("h1", {id="heading"}, "Hello World!");
+
+So behind the scenes, React.createElement is creating an JS object which is then converted into an HTML element by ReactDOM.createRoot and then rendered. And the content inside the HTML here replaces the original content present in the div with id of root.
+Sometimes developers keep "Not Rendered" inside the index.html's div with id of root, because if something goes wrong then we can identify that there is problem with our render in the app.
+
+
+
+
+JSX - This is a syntax which is easier to create React elements. JSX IS NOT HTML, it is just HTML like syntax.
+We think that JSX and React are same. But no they are not same, we can build React app without JSX. In the core of React we create element by using React.createElement. But those are not too readable. JSX just makes our life easier while creating React apps.
+JSX is a convention where we merge the markup and logic together.
+Now JSX is not a pure valid JS code/React code so the JS Engine won't understand this, thus it is transpiled to pure JS/React code to be understood by JS Engine. This is done by Parcel, but we know that parcel alone cannot do many things so here also it took help from another package called BABEL.
+Example: const jsxHeading = <h1 id="heading">Hello World!</h1>
+
+BABEL - Babel is another very important npm package/library. Babel is a JavaScript Compiler.
+
+How JSX works? JSX is complied/transpiled by Babel to React.createElement, which is basically creating JS object and this is then rendered as HTML elements onto the DOM. So JSX behind the scene is basically React.createElement.
+
+In JSX if we want to pass attributes we have to use camelCase.
+
+If a JSX element is present in a single line then its okay, but if we want to write it in multiple lines we have to wrap it up in simple braces, it's mandatory to use simple braces, so that babel understands where an element is starting and where its ending.
+
+
+
+
+REACT COMPONENTS - 
+- Class Components
+- FUNCTIONAL COMPONENTS: These are normal JS functions which returns some JSX or react element. Not just one but multiple react elements nested.
+Example - const HeadingComponent = () => {
+            return <h1 className="heading">Hello World!</h1>
+          } 
+          (or)
+          const HeadingComponent = () => (
+            <h1 className="heading">
+                Hello World!
+            </h1>
+          )
+        Both of the above functions are same, just differ in the way of writting.
+Now to render a functional component inside the root, we do -->  root.render(<HeadingComponent />);
+
+COMPONENT COMPOSITION: Composing two or multiple components inside one another.
+Example - const Title = () => (
+            <div>
+                <h1>Hello from Title.</h1>
+            </div>
+          );
+
+          const Heading = () => (
+            <div>
+                <Title />
+                <h1>Hello from Heading.</h1>
+            </div>
+          );
+
+          const root = ReactDOM.createRoot(document.getElementById("root"));
+          root.render(<Heading />);
+
+*We can use normal JS function syntax too instead of arrow function while writting functional components, but return keyword would then be mandatory.
+
+*We can inject normal JS code inside JSX with the use of curly braces. It will then have all the powers of JS and we can do anything inside JSX that we could do with JS.
+
+We can have elements inside components and vice-versa, and also components inside components, elements inside elements.
+Example:
+  - const elem1 = <h1>Hello from n element 1.</h1>
+
+    const AnonymousComponent1 = () => (
+        <div>
+            {elem}
+            <h1>Hello from Anonymous Component 1.</h1>
+        </div>
+    )
+
+  - const AnonymousComponent2 = () => <h1>Hello from Anonymous Component 2.</h1>
+
+    const elem2 = (<span>
+        <AnonymousComponent2 />
+        <h1>Hello from element 2.</h1>
+    </span>)
+
+  - const AnonymousComponent1 = () => <h1>Hello from Anonymous Component 1.</h1>
+
+    const AnonymousComponent2 = () => (
+        <div>
+            <AnonymousComponent1 />
+            <h1>Hello from Anonymous Component 2.</h1>
+        </div>
+    )
+
+  - const elem1 = <h1>Hello from n element 1.</h1>
+
+    const elem2 = (<span>
+        {elem1}
+        <h1>Hello from element 2.</h1>
+    </span>)
+
+CROSS-SITE SCRIPTING ATTACKS: Let's say we get some data from an API call, and that's some mallisious data. So the attacker gets access to run some JS code onto our system and thereby can read our local storage, read our cookies, session storage, get data and information about the laptop.
+But JSX takes care of these injection attacks. JSX will escape the malissious data. Whatever comes inside the curly braces brwser or JSX won't blindly run it, it will sanitize the data and then pass it. JSX will prevet the cross site scripting attacks.
+
+DIFFERENT WAYS OF CALLING A COMPONENT:
+- <FunctionalComponent />
+- <FunctionalComponent></FunctionalComponent> 
+- {FunctionalComponent()}
+Functional components are nothing but simple JS functions therefore we can call them inside any component/element as {FunctionalComponent()} too.
