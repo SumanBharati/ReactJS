@@ -6,49 +6,8 @@
     <title>Namaste React</title>
     <link rel="stylesheet" href="./index.css" />
   </head>
-  <body>
-    <!-- React can be applied to a part of a web page whose id here is root. -->
-    <!-- <div>I'm above the root div.</div> -->  
-    <div id="root">
-      <!-- root.render in App.js file replaces pre-existing content inside this div with id of root, for example here h1 tag content will be replaced by heading from App.js. -->
-      <!-- <h1>Hello World from HTML(index.html file).</h1> -->
-    </div>
-
-
-    <!-- JavaScript inside HTML -->
-    <!-- <script>
-      const heading = document.createElement("h1");
-      heading.innerHTML = "Hello World from JavaScript.";
-
-      const root = document.getElementById("root");
-      root.appendChild(heading);
-    </script> -->
-
-
-    <!-- CDN links to get react into our application -->
-    <!-- <script
-      crossorigin
-      src="https://unpkg.com/react@18/umd/react.development.js"
-    ></script>
-    <script
-      crossorigin
-      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
-    ></script> -->
-
-
+  <body> 
+    <div id="root"></div>
     <script type="module" src="./App.js"></script>
-
-
-    <!-- React inside HTML -->
-    <!-- Line no.47 - We are creating a react element at,i.e., a normal JS object via React.createElement. -->
-    <!-- Line no.48 - Then we need to have a root where all the DOM manipulations will be done, a root where the rendering will happen. And that is done via ReactDOM.createRoot -->
-    <!-- Line no.49 - The render method here takes up the JS object, convert it into HTML that the browser understands and put it in root -->
-    <!-- <script>
-      const heading = React.createElement("h1", {}, "Hello World from React.");
-      const root = ReactDOM.createRoot(document.getElementById("root"));
-      root.render(heading);
-    </script> -->
   </body>
 </html>
-
-<!-- We can generate boiler plate code either by using ! or by using html:5, and then emmet will do its job. -->

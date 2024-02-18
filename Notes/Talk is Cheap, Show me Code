@@ -1,0 +1,9 @@
+PROPS - These are short form for properties.
+As we know functional components are nothing but JS functions, thus props are arguments to our function.
+When we want to pass some dynamic data between components we pass them as props. 
+Whenever we are passing some arguments from one component, raect wrap these data into an object and it gets passed to other component. And we can access them as {props.argumentName}.
+
+CONFIG DRIVEN UI: 
+
+KEY: 
+not using keys (not acceptable) <<<<<< indexs as keys <<<<<< unique ids (best practice)
