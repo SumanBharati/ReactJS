@@ -1,0 +1,27 @@
+Folder Structure - 
+
+EVENT HANDLERS - 
+
+HOOKS - These are normal JS utility function which has some superpowers. It has its own logic written behind the scenes in React, its a utility function given to us by React .
+- useState(): It has 2 parameters, one is a state variable and other is the setter function. We provide some initial value inside the useState and later as per the requirement we can change the variable only using the setter function.
+Example: import { useState } from 'react';
+
+         const [variableName, setVariableName] = useState(""); 
+
+         This above syntax is array destructuring. The useState function returns an array and the 1st element of the array is variable and the 2nd element is the setter function.
+         The above lines can also be written as follows,
+         const arr = useState("");
+         const variableName = arr[0];
+         const setVariableName = arr[1];
+
+This 2nd parameter above is there so that React finds out the diff and updates the DOM. There needs to be some trigger to start the diff algorithm and update the UI, therefore we have this 2nd function. Whenever we call this 2nd function React will re-render the component.
+
+*Whenever a State variable updates, react re-renders the component.
+
+React keeps the data layer in-sync with the UI layer.
+
+React uses something called RECONCILIATION ALOGORITHIM/REACT FIBER - This concept came up in React16. Its a new way of finding the diff and updating the DOM.
+DOM is a tree like representation of our document containing the tags.
+Virtual DOM is just a JS object representation of actual DOM.
+Diff Algorithm - Virtaul DOM keeps a copy of old represention of DOM elements and new changes, and then updates only the new change in that particular part of DOM instead of updating the whole DOM.
+*Read more about React-Fiber-Architecture from github link.  

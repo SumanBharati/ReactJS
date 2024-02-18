@@ -1,33 +1,4 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import foodLogo from "./Assets/Food-logo.jpg";
-import indianSpiceImg from "./Assets/IndianSpice.jpg";
-
-/*
-* Header
-    - Logo
-    - Nav Items
-        - Home
-        - About
-        - Contact Us
-        - Cart
-* Body
-    - Search Bar
-    - Restaurant Container
-        - Restaurant Card
-            - Food Image
-            - Name of Restaurant
-            - Star rating
-            - Cuisine
-            - Deivery Time
-* Footer
-    - Copyright
-    - Links
-    - Address
-    - Contact detail
-*/
-
-const restaurantList = [
+export let restaurantList = [
   {
     info: {
       id: "733836",
@@ -35,7 +6,7 @@ const restaurantList = [
       cloudinaryImageId: "1e9ecf71dc7d9eefbed2a7b0627b6e8f",
       costForTwo: "100000",
       cuisines: ["North Indian", "Indian"],
-      avgRatingString: "--",
+      avgRatingString: "2.1",
       deliveryTime: 40,
     },
   },
@@ -153,71 +124,3 @@ const restaurantList = [
     },
   },
 ];
-
-const Header = () => {
-  return (
-    <div className="header">
-      <div className="logo-container">
-        <img className="app-logo" src={foodLogo} alt="food-app-logo" />
-        <h4 className="app-name">TOMATO</h4>
-      </div>
-      <div className="nav-item">
-        <ul>
-          <li>Home</li>
-          <li>About</li>
-          <li>Contact Us</li>
-          <li>Cart</li>
-        </ul>
-      </div>
-    </div>
-  );
-};
-
-const RestaurantCard = (props) => {
-  const {resData} = props;
-  const {cloudinaryImageId, name, cuisines, avgRating, costForTwo, deliveryTime} = resData?.info;
-
-  return (
-    <div className="res-card">
-      <img
-        className="restaurant-image"
-        src={
-          "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_208,h_208,c_fit/" +
-          cloudinaryImageId
-        }
-        alt="restaurant-image"
-      />
-      <h3 className="res-name">{name}</h3>
-      <h4>{cuisines.join(", ")}</h4>
-      <h4>{avgRating} rating</h4>
-      <h4>&#x20b9;{costForTwo / 100} FOR TWO</h4>
-      <h4>ETA {deliveryTime} minutes</h4>
-    </div>
-  );
-};
-
-const Body = () => {
-  return (
-    <div className="body">
-      <div className="search-bar">SearchBar</div>
-      <div className="res-container">
-        {restaurantList.map((restaurantData) => (
-          <RestaurantCard key={restaurantData.info.id} resData={restaurantData} />
-        ))}
-      </div>
-    </div>
-  );
-};
-
-const App = () => {
-  return (
-    <div className="App">
-      <Header />
-      <Body />
-    </div>
-  );
-};
-
-const root = ReactDOM.createRoot(document.getElementById("root"));
-
-root.render(<App />);

@@ -3,7 +3,30 @@ As we know functional components are nothing but JS functions, thus props are ar
 When we want to pass some dynamic data between components we pass them as props. 
 Whenever we are passing some arguments from one component, raect wrap these data into an object and it gets passed to other component. And we can access them as {props.argumentName}.
 
-CONFIG DRIVEN UI: 
+CONFIG DRIVEN UI: UI is controlled by config which is set by backend.
 
 KEY: 
 not using keys (not acceptable) <<<<<< indexs as keys <<<<<< unique ids (best practice)
+
+MOCK DESIGN OF OUR FOOD DELIVERY APP:
+* Header
+    - Logo
+    - Nav Items
+        - Home
+        - About
+        - Contact Us
+        - Cart
+* Body
+    - Search Bar
+    - Restaurant Container
+        - Restaurant Card
+            - Food Image
+            - Name of Restaurant
+            - Star rating
+            - Cuisine
+            - Deivery Time
+* Footer
+    - Copyright
+    - Links
+    - Address
+    - Contact detail
