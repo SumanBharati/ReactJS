@@ -1,0 +1,57 @@
+MONOLITH APPLICATION - In this huge big project, we have all the code related to API, UI, Authentication, DataBase connectivity, Notification basically everything the backend, frontend, DB connectivity all are inside the same service.
+And if we want to make even a minor change ex: color change of a button, we have to build, compile and deploy the whole big bulky project.
+
+MICROSERVICE - World is moving towards micro service architechture.
+Here we have different service for different job. There is seperate backend project/service, frontend/UI project, Authentication service, DB, Notification(SMS), EMail notification service, all these are very small services and together these combine to form a big application.
+All these micro services talk to each other depending upon the use cases.
+Here the deployment cycle is different for different service.
+There are different micro services for different jobs - this is called SEPERATION OF CONCERN / SINGLE RESPONSIBILITY PRINCIPLE, where each and every serice has its own job, nobody is intefering with other.
+
+How these micro services enteract with each other?
+All the micro services are deployed on seperate port, let's say UI is deployed on 1234 port, Backend on 1000 port, Authentication on 3000 port and others on some other ports. At the end of the day, all these ports can be mapped to a domain name. Suppose the backend is mapped to '/api', authentication to '/auth', UI to '/'. Now how they interact, they make calls to different URLs. For ex: as soon as the main domain (followed by /) is hit UI port 1234 is called and now if UI wants to interact with backend, it makes call to '/api'.
+
+
+2 WAYS HOW UI APPLICATIONS FETCH THE DATA: 
+- As soon as our page loads, we make an API call and when data comes we render the UI.
+  Loads --> API --> Render
+
+- As soon as the page loads, we render the UI. After this we make an API call and once the data comes we re-renders the UI
+  Loads --> Render --> API --> Re-render
+
+With React we always use the 2nd approach, it doesn't matter if we are re-rendering UI the 2nd time as React's render cyle is very fast, it has the best render mechanism. With this approach the user experience would be better, as in the earlier approach we can see that the page lags initially till the data comes, but in 2nd approach the user atleast see some skeleton and slowly the data fills in, it doesn't have the jitteriness as in the first approach.
+
+
+
+useEffect Hook - It is another JS function which has its own use case. It is also imported from react library.
+It is called with two arguments, one it the callback function and other is dependency array.
+Syntax for calling useEffect: useEffect(() => {}, []);
+*This useEffect's CALLBACK FUNCTION WILL BE CALLED AFTER THE COMPONENT RENDERS. 
+Ex: const Body = () => {
+    useEffect(() => {console.log("useEffect called")}, []);
+
+    console.log('Body Rendered');
+
+    return(
+        <></>
+    )
+}
+WHich will be printed first in the above ex? 
+--> Body Rendered will be printed onto the console first, followed by useEffect called, as the useEffect's callback function is called after the component is renedered and console.log('Body Rendered') is a part of component, so it will be printed with the component render.
+
+
+OPTIONAL CHAINING
+
+SHIMMER UI - Till we get the data from the API to be loaded onto our page, we show some dummy UI like grey cards till the data is loaded..
+
+
+What is the purpose of state variables and what happens when setter function is called?
+-->Let's say we have a variable for button name and its setter function for changing the button name in Header component, so on click of the button when the setter function updates the button name to some new value, the whole header component re-renders and a new varibale with the updated name is set afresh (that's why const variable is able to take new value, as it is considering a new const variable creation with new value set by the setter function), and then it finds the diff between the new version of the component and the older version and finds out only button name has changed and nothing else, so only button updates in the DOM. This is called RECONCILIATION.
+
+*WHENEVER THERE IS A STATE VARIABLE UPDATE, REACT TRIGGERS A RECONCILIATION CYCLE(RE-RENDERS THE COMPONENT).
+
+*React is fast not because it has Virtual DOM, but because of React Fibre, the new reconciliation algorithm where it finds the diff and only updates the required things in the DOM.
+
+
+CORS Issue handle:
+- Via CORS plugin by Google: Add it as an extension and turn it ON to by pass proxy, to resolve CORS issue.
+- Via 'https://corsproxy.io/?': this needs to be appended as a prefix to the url to which we are making an API call.
