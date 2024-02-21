@@ -1,7 +1,10 @@
 * {
-    background-color: rgb(68, 65, 65);
     margin: 0;
     padding: 0;
+}
+
+.app {
+    background-color: rgb(66, 65, 65);
 }
 
 .header {
@@ -11,22 +14,22 @@
 }
 
 .logo-container {
-    padding-left: 2%;
-    padding-bottom: 0.5%;
+    padding-left: 1%;
     background-color: white;
 }
 
 .app-logo {
     align-content: center;
     width: 100px;
+    padding-left: 4%;
 }
 
 .app-name {
-    text-align: center;
     margin: 0;
-    padding-left: 8px;
     background-color: white;
     font-family: scandia-gh, Helvetica, Arial, sans-serif;
+    color:#e99546;
+    font-size: 13px;
 }
 
 .nav-item {
@@ -37,7 +40,7 @@
 .nav-item > ul {
     display: flex;
     list-style-type: none;
-    margin-top: 10%;
+    margin-top: 2.5%;
     padding-left: 0%;
     font-size: 18px;
     background-color: white;
@@ -60,14 +63,19 @@
     margin: 10px;
     padding: 5px;
     width: 227px;
+    height: 450px;
     background-color: #f0f0f0;
     border-radius: 10px;
 }
 
 .res-card:hover {
     cursor: pointer;
-    border: 1px solid rgb(110, 108, 108);
-    border-radius: 5%;
+    background-color: #e4db67;
+}
+
+.link {
+    text-decoration: none;
+    color: black;
 }
 
 .restaurant-image {
@@ -77,10 +85,9 @@
 }
 
 .res-name {
-    background-color: #f0f0f0;
     font-family: scandia-gh, Helvetica, Arial, sans-serif;
     font-weight: bold;
-    font-size: 16.1px;
+    font-size: 18px;
 }
 
 .shimmer-container {
@@ -99,11 +106,12 @@
     border-radius: 10px;
 }
 
-.btn {
+.btn-name {
     padding:0 20px;
     cursor: pointer;
-    margin-bottom: 5px;
-    color: white;
+    margin: 10px 0px 15px 10px;
+    border-radius: 10px;
+    font-size: 15px;
 }
 
 .search-filter-container {
@@ -121,5 +129,13 @@
 }
 
 .search-input {
+    background-color: white;
+}
+
+p {
+    margin: 20px 10px 20px 5px;
+}
+
+.menu {
     background-color: white;
 }

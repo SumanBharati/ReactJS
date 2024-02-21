@@ -1,0 +1,42 @@
+useEffect() - It is another JS function which has its own use case. It is also imported from react library.
+It is called with two arguments, one it the callback function and other is dependency array.
+Syntax for calling useEffect: useEffect(() => {}, []);
+*This useEffect's CALLBACK FUNCTION WILL BE CALLED AFTER THE COMPONENT RENDERS.
+- If dependency array is not present at all --> useEffect will be called everytime after the component renders, or re-renders.
+- If dependency array is empty - [] --> useEffect will be called just once, after the initial render.
+- If dependency array has some condition --> useEffect will be called everytime that condition will fulfill, ex: useEffect(() => {
+    console.log('useEffect called')
+}, [btnName]);
+The above code will execute every time the btnName variable is updated/changed.
+
+Rules while working with hooks:
+- Never create hooks outside your functional component body.
+- Always create useState hooks on the higher level  inside your functional components.
+- Never use hooks inside conditional statements, loops, or functions.
+
+
+
+react-router-dom : Read react router website
+
+- createBrowserRouter
+- RouterProvider
+- Outlet
+
+useRouterError() hook: This is provided by react-router-dom library. It tells us more about the error.
+Syntax for useRouterError - const err = useRouterError();
+
+
+In React if we want to navigate to a new page we should never use the anchor tag. Why?
+--> Because the whole page gets refreshed, and we don't want that while working with React. React is primarily used to make Single Page Applications (SPAs). We want to navigate to new page without loading the whole page by using link component provided by react-router-dom.
+Example: <Link to="/about">About</Link>
+
+SPAs: Its a single page, just the components getting interchanged via client-side routing.
+
+There are 2 TYPES OF ROUTING:
+- Client Side Routing: Here we don't make any network call, the information is already present as all the components are already loaded inside our application when we load the page and when we want to navigate between pages only that components loads, we are not fetching any page here.
+- Server Side Routing: Here we make network calls and the information is returned from the server to us resulting in the page refresh when data comes and fills in the application.
+
+
+* Read about GraphQL
+GraphQL - It helps us deal with under fertching and over fetching. It helps to load only the data required in our app. 
+There can be situations when backend sends tons of data and we need to show very few of them, in those situations GraphQL makes our life easier.

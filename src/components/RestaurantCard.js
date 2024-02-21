@@ -18,7 +18,7 @@ const RestaurantCard = (props) => {
         src={CDN_URL + cloudinaryImageId}
         alt="restaurant-image"
       />
-      <p className="res-name">{name}</p>
+      <p className="res-name">{name.toUpperCase()}</p>
       <p>{cuisines.join(", ")}</p>
       <p>{avgRating} rating</p>
       <p>{costForTwo}</p>
