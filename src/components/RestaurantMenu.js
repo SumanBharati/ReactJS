@@ -5,6 +5,7 @@ import { MENU_API_URL } from "../utils/constants";
 
 const RestaurantMenu = () => {
   const [menuList, setMenuList] = useState(null);
+  
   useEffect(() => {
     fetchMenuData();
   }, []);
@@ -34,9 +35,9 @@ const RestaurantMenu = () => {
         {cuisines} - {costForTwoMessage}
       </h3>
       <ul>
-        {itemCards.map((foodItem) => (
+        {itemCards?.map((foodItem) => (
           <li key={foodItem.card.info.id}>
-            {foodItem.card.info.name} - {foodItem.card.info.price}
+            {foodItem.card.info.name} -  &#x20B9;{foodItem.card.info.price/100}
           </li>
         ))}
       </ul>
