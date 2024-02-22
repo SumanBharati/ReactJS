@@ -1,43 +1,25 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import useRestaurantsList from "../utils/useRestaurantsList";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 const Body = () => {
-  const [listOfRestaunts, setListOfRestaunts] = useState([]);
-  const [filteredListOfRestaurants, setFilteredListOfRestaurants] = useState(
-    []
-  );
+  const list = useRestaurantsList();
+  const mainList = list[0];
+  const mainListCopy = list[1];
+  // const [mainList, setMainList] = useState(list[0]);
+  // const [mainListCopy, setMainListCopy] = useState(list[1]);
+  const onlineStatus = useOnlineStatus();
   const [searchText, setSearchText] = useState("");
 
-  useEffect(() => {
-    handleFetch();
-  }, []);
-
-  const handleFetch = async () => {
-    const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
-    );
-
-    const json = await data.json();
-
-    //Optional Chaining
-    setListOfRestaunts(
-      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-    );
-    setFilteredListOfRestaurants(
-      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-    );
-  };
-
   const handleClick = () => {
-    setListOfRestaunts(
-      listOfRestaunts.filter(
-        (restaurants) =>
-          restaurants.card?.card?.info &&
-          restaurants.card.card.info.avgRating > 4
-      )
-    );
+    console.log("Need to fix this filter");
+    // const filteredList = mainList.filter((restaurant) => {
+    //   restaurant.info && restaurant.info.avgRating > 4
+    // });
+    // setMainListCopy(filteredList);
   };
 
   // const handleChange = (e) => {
@@ -47,8 +29,11 @@ const Body = () => {
   //   }
   // }
 
+  if (onlineStatus === false)
+    return <h1>Please check your internet connection!!! You seems offline.</h1>;
+
   // Conditional Rendering
-  return listOfRestaunts.length === 0 ? (
+  return mainList.length === 0 ? (
     <Shimmer />
   ) : (
     <div className="body">
@@ -65,12 +50,19 @@ const Body = () => {
           <button
             className="search-btn"
             onClick={() => {
-              const filterList = listOfRestaunts.filter((restaurants) =>
-                restaurants.info.name
-                  .toLowerCase()
-                  .includes(searchText.toLowerCase())
-              );
-              setFilteredListOfRestaurants(filterList);
+              console.log("Need to fix this searchBar");
+              // const searchedList = mainList.filter((restaurant) => {
+              //   restaurant.info.name
+              //     .toLowerCase()
+              //     .includes(searchText.toLowerCase());
+              // });
+              // setMainListCopy(searchedList);
+              // const filterList = list[0].filter((restaurants) =>
+              //   restaurants.info.name
+              //     .toLowerCase()
+              //     .includes(searchText.toLowerCase())
+              // );
+              // setFilteredListOfRestaurants(filterList);
             }}
           >
             Search
@@ -83,7 +75,7 @@ const Body = () => {
         </div>
       </div>
       <div className="res-container">
-        {filteredListOfRestaurants.map((restaurantData) => (
+        {mainListCopy.map((restaurantData) => (
           <Link
             className="link"
             key={restaurantData.info.id}

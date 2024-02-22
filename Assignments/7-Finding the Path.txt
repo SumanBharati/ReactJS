@@ -1,0 +1,26 @@
+Assignment Questions:
+
+1) What are the various ways to add images into our App? Explain with code examples.
+
+2) What would happen if we do console.log(useState())?
+It will log an array containing 2 element, first will be a undefined variable and second will be a function.
+
+3) How will useEffect behave if we don't add a depedency array?
+If dependency array is not present at all, useEffect will be called everytime after the component renders, 
+or re-renders.
+
+4) What is SPA?
+Its a single page, just the components getting interchanged via client-side routing.
+
+5) What is difference between Client side routing and Server side routing?
+- Client Side Routing: Here we don't make any network call, the information is already present as all the 
+components are already loaded inside our application when we load the page and when we want to navigate 
+between pages only that components loads, we are not fetching any page here.
+- Server Side Routing: Here we make network calls and the information is returned from the server to us 
+resulting in the page refresh when data comes and fills in the application.
+
+
+
+
+*Practice question already completed and committed into the code repo with the commit message 
+'ReactJS-FindingThePath'

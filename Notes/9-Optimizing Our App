@@ -1,0 +1,59 @@
+Single Responsibility Principle - This is a concept where we assign a single responsibility to each and every component. This way we'll be able to make our app more modular and testable. As testing a particular component in this case will become easier compared to testing a big component having multiple features/responsibility, and if there arises some random error message, we might not be able to figure out the issue easily. Whereas with smaller components having single feature we can easily identify the issue and resolve it.
+Important features of SRP are: 
+- Our code becomes Reusable
+- Maintainable
+- Testable
+However Single responsibility principle has no hard and fast rule. We cannot judge whether a component has SRP applied to it or not. But we should try to keep our component as light as possible.
+
+
+CUSTOM HOOKS - Earlier we studied about some react hooks like useState, useEffect, useRouteError, useParams which were provided to us by react/react-router-dom. Hooks are nothing but normal JS functions, these are special JS utility functions given to us by react. Similarly we can create our own custom hooks. 
+Custom hooks will let us,
+- extract the extra responsibility from a component,
+- create more modular code : by extracting extra responsibilty from from a component and putting that into a custom hook, we are making our code more modular.
+- optimize our code
+
+It is RECOMMENDED to use 'use' keyword as a prefix to custum hook names, its not MANDATORY however. Similary its RECOMMENDED to write functional component and its file name starting with capital letter.
+Sometimes our project might have some linter set up and that can through error if we don't follow the recommended way.
+LINTER is a developer tool that analyzes source code for errors, vulnerabilities, and stylistic issues to improve code quality.
+Code linting is a type of static analysis that is frequently used to find problematic patterns or code that doesn't adhere to certain style guidelines.
+'ESLint' is an open source JavaScript linting utility.
+'ESLint' is a static code analysis tool for identifying problematic patterns found in JavaScript code.
+
+
+
+
+When we are building large scale applications having thousands of component, the performance of the application will niot be good.
+We learned about Parcel, which is a bundler. A bundler basically bundles all our files into one file.
+If we see the dist folder, we will find one JS file for all the JS files. And we are working in development mode where if we see this JS file, it is not compressed or minified, in production the code will be compressed, minified but there too only one JS file will be present.
+If we go onto the browser, we will see all the work is happening with just one JS file. All the code of various components of our application is inside on JS file, which our bundler(Parcel) has created.
+If our application is huge, then the size of that bundled JS file will be too big. Our JS file size increases by how many component it holds.
+We can't make large scale production ready applications if we don't take care of this.
+Our application will take a lot of time to load, so we should break our app into smaller pieces,i.e., our application is not just one large JS file bundle but smaller JS file bundles.
+This  process is called CHUNKING
+                        CODE SPLITTING
+                        DYNAMIC BUNDLING
+                        LAZY LOADING
+                        ON DEMAND LOADING
+                        DYNAMIC IMPORT
+
+LAZY LOADING - 
+'lazy()' - It is a function given to us by react. And we import it as a named import from React library.
+This lazy function takes a callback function which has import function inside it that takes the path of the component we want to load lazily,i.e., on demand.
+Syntax: const Grocery = lazy(() => import(./components/Grocery));
+
+After lazy loading of our grocery component, if we load our app, we will find the the JS bundle file doesn't have code for the grocery component.
+And when we click on grocery component, we'll have a new JS bundle file for Grocery component.
+
+Theres a catch here, when you click on Grocery it throws error. And thats because react tries to load the component too quickly and the data of the component is still not present.
+
+'Suspense' - So to overcome the above mentioned issue React has a component called 'Suspense'.
+We have to wrap the component which we want to load lazily inside Suspense, and this suspense has an attribute called fallback. Fallback can take up any JSX.
+Syntax: <Suspense fallback={<h1>Loading.....</h1>}><Grocery /></Suspense> 
+        (or)
+        <Suspense fallback={<Shimmer />}><Grocery /></Suspense> 
+So till the time the Grocery component loads, react is falling back to the loading text or Shimmer component.
+
+These few lines of code can make our large scaled application very light weight, fast performing, optimized.
+
+When we use this lazy loading, all the code doesn't come at once, it will only come when it is requested.
+When the bundle file size is increasing, we have hundreds and thousands of component inside our application, we can distribute our application into smaller smaller chunks, and this will make our application super performant.
