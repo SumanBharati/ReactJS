@@ -23,11 +23,6 @@ class About extends Component {
           location={"Manchester, NH"}
           contact={"sumanbharati07@gmail.com"}
         />
-        <User
-          name={"Vikas Modi"}
-          location={"Manchester, NH"}
-          contact={"er.vikasmodi@gmail.com"}
-        />
       </div>
     );
   }

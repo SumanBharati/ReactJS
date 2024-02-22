@@ -1,0 +1,284 @@
+In this we'll learn about Class component.
+
+CLASS-BASED COMPONENT - These are normal JS classes (that extends a react component provided by react library)
+which have a render method that returns some JSX.
+Syntax:
+import React from 'react';
+class App extends React.Component {
+render(){
+return <div></div>
+}
+}
+Here 'extends React.Component' in the syntax tell react that this is a class based component.
+This React.Component is a class present inside react package.
+
+In FUNCTIONL COMPONENTS we  recieve props as parameters (passed from any parent components as arguments).
+Ex: Parent Component:
+    const Parent = () => {
+        return (
+            <div>
+                <Child name={"Suman Bharati"} />
+            </div>
+        )
+    }
+
+    Child Component:
+    const Child = (props) => {
+        return (
+                <div>
+                    <h2>Name: {props.name}</h2>
+                </div>
+            )
+    }
+
+
+In case of CLASS COMPONENTS, the way we pass props from Parent component is similar to the way we follow in functional components, but here we get the props inside constructor where we have to use super(props) and we then access the data from props as 'this.props.dataValue',
+Ex: Parent Component:
+    const Parent = () => {
+        return (
+            <div>
+                <Child name={"Suman Bharati"} />
+            </div>
+        )
+    }
+
+    Child Component:
+    class Child extends React.Component{
+
+        constructor(props){
+            super(props)
+        }
+
+        render(){
+            const { name } = this.props;
+            return(
+                <div>
+                    <h2>Name: {name}</h2>
+                </div>
+            )
+        }
+    }
+
+At line no. in the above example we are destructuring our props.
+
+In functional component, whenever we use that particular functional component inside another component (whenever we are loading/mounting a functional component onto our webpage), that function gets called/invoked.
+
+But in class based component, whenever we use a class component inside other components (whenever we are loading/mounting a class component onto our webpage), an instance of the class gets created and constructor is called/invoked. The props are extracted inside the constructor and we can then use them anywhere inside our component.
+
+This is basic fundamental of JS, where we call a function, and for a class, an instance of it gets created.
+
+
+
+STATES in Class-based components: Constructor is the best place to create state or local variable inside the class-based component. Here we define the state variable inside an object containing all other state variables of a class component. And we access them inside our component as 'this.state.stateVariableName'.
+Syntax: constructor(props){
+            super(props);
+
+            this.state = {
+                count : 0,
+                btnName : 'Increment'
+            }
+        }
+
+        render(){
+            const { count, btnName } = this.state;
+            return(
+                <>
+                <h2>Count: {count}</h2>
+                <button>{btnName}</button>
+                </>
+            )
+        }
+
+
+
+
+Sequence of code execution in class-based component:
+- Constructor() executes first
+- then render() executes
+- then componentDidMount()
+Ex:
+class About extends Component {
+  constructor(props) {
+    super(props);
+
+    console.log("Parent Constructor");
+  }
+
+  componentDidMount() {
+    console.log("Parent Component Did Mount");
+  }
+
+  render() {
+    console.log('Parent Render');
+    return <></>
+  }
+}
+
+class User extends Component {
+  constructor(props) {
+    super(props);
+
+    console.log("Child Constructor");
+  }
+
+  componentDidMount() {
+    console.log("Child Component Did Mount");
+  }
+
+  render() {
+    console.log('Child Render');
+    return <></>
+  }
+}
+
+So the sequence of log here would be: - Parent Constructor
+                                      - Parent Render
+                                        - Child Constructor
+                                        - Child Render
+                                        - Child Component Did Mount
+                                      - Parent Component Did Mount
+
+
+*Refer 'projects.wojtekmaj.pl/react-lifecycle-methods-diagram' for REACT LIFECYCLE METHODS understanding.
+
+React lifecycle's Mounting phase has further 2 more phases,i.e., in react when a component is mounted it is mounted in 2 phases, namely,
+- Render phase: This comprises of constructor method and render method calls respectively. 
+- Commit phase: This comprises of DOM updation first, followed by componentDidMount call. That's why componentDidMount is best place to make API calls.
+This Mounting phase is present for every component in react. And thus react is fast.
+Ex:
+class About extends Component {
+  constructor(props) {
+    super(props);
+
+    console.log("Parent Constructor");
+  }
+
+  componentDidMount() {
+    console.log("Parent Component Did Mount");
+  }
+
+  render() {
+    console.log('Parent Render');
+    return (
+        <>
+            <User name={"Child 1"} />
+            <User name={"Child 2"} />
+            <User name={"Child 3"} />
+        </>)
+  }
+}
+
+class User extends Component {
+  constructor(props) {
+    super(props);
+
+    console.log(this.prop.name + "Constructor");
+  }
+
+  componentDidMount() {
+    console.log(this.prop.name + "Component Did Mount");
+  }
+
+  render() {
+    console.log(this.prop.name + 'Render');
+    return <></>
+  }
+}
+The sequence of log will be as follows:
+- Parent Constructor
+- Parent Render
+  - Child 1 Constructor
+  - Child 1 Render
+  - Child 2 Constructor
+  - Child 2 Render
+  - Child 3 Constructor
+  - Child 3 Render
+  - Child 1 Component Did Mount
+  - Child 2 Component Did Mount
+  - Child 3 Component Did Mount
+- Parent Component Did Mount
+
+Here in the above example the render phase of all the 3 child will be batched together, executed one after the other, and then the commit phase of each will start.
+We know that there is render inside the render phase where actually the reconciliation happens, react triggers the reconciliation and virtual DOM is created followed by finding the diff. Thus react batches the render phase of all the child components so that it doesn't have to make expensive DOM manipulation multiple times, it can do the DOM manipulation in single batch if the render phase (reconciliation) happends before hand for all the child component.
+And then the DOM is updated in one single batch followed by the componentDidMount().
+This way React OPTIMIZES THE PERFORMANCE of our app.
+
+The sequence of lifecycle method execution is as follows,
+- MOUNTING 
+  - CONSTRUCTOR is called and it sets the state with some dummy data
+  - RENDER is called and it loads the page with some dummy/default data
+    <HTML with the dummy data> - this happens for few milliseconds
+  - COMPONENT DID MOUNT is called, 
+    and when this is called we make an API call
+    <API call>
+    and this.setState is set
+    <this.setState>
+- UPDATING : Whenever there is setState it triggers the reconciliation and update cycle begins.
+  - Since the setState is set,i.e.,the state variable is update, now the RENDER method will be called again 
+    but this time with the API data,
+    <HTML with the new API data>
+  - COMPONENT DID UPDATE will be called
+- UNMOUNTING : This happens just before our component unmounts. When the component will disappear from the HTML and this happens when we switch component and move out of the parent component.
+
+
+DISCLAIMER: Many a times we see blogs mentioning that useEffect is equivalent to componentDidMount or componentDidUpdate, but we should never compare them. 
+
+*In functional component : 
+- If dependency array is not present at all --> 'useEffect' will be called everytime after the component renders, or re-renders.
+- If dependency array is empty - [] --> 'useEffect' will be called just once, after the initial render.
+- If dependency array has some condition - ex:[count] --> 'useEffect' will be called every time the count variable changes
+
+We can have multiple state variables inside the dependency array if the functionality they expecting is same on their state update.
+Ex: useEffect(() => {
+        ---common functionality on both count, and btnName update---
+    }, [count, btnName])
+
+We can have multiple useEffect inside a functional component, based on the functionality on multiple variable update.
+Ex: useEffect(() => {
+        ---different functionality on count update---
+    }, [count])
+
+    useEffect(() => {
+        ---different functionality on location update---
+    }, [location])
+
+
+*In class-based components :
+- componentDidMount is called just ONCE after the initial render.
+- After subsequent render, componentDidUpdate is called (based on the condition provided), not componentDidMount
+  Example: componentDidUpdate(prevProps, prevState) {
+                if(this.state.count !== prevState.count || this.state.btnName !== prevState.btnName) {
+                    ---do something---
+                }
+
+                if(this.props.location !== prevProps.location) {
+                    ---do something---
+                }
+           }
+We can't have multiple componentDidUpdate inside class components, we have to write multiple conditional statements based on different variable update. Refer above example.
+- componentWillUnmount is called when we are leaving the component view.
+Usecase for componentWillUnmount: When we want to switch view, we should always clear the important stuff and that's where componentWillUnmount comes into play.
+
+componentDidMount() {
+    this.setInterval(() => {
+        console.log('Hello from interval');
+    }, 1000);
+}
+This will keep on going even if we switch view, and further it will start multiple intervals everytime you come back to this view. So this needs to be cleared as follows,
+componentWillUnmount(){
+    clearInterval(this.timer);
+}
+
+Now, how can we achieve the same things working with functional component?
+In functional componet also if we use a setInterval or setTimer inside our useEffect, it will keep on going until we clear that up. And that can be achieved by returning a function inside useEffect.
+Yes we can return a function from useEffect as follows,
+useEffect(() => {
+    const timer = setInterval(() => {
+        console.log('Hello from setInterval inside useEffect')
+    }, 1000);
+
+    return (() => {
+        clearInterval(timer);
+    })
+})
+This function returned from useEffect will be called when we are UNMOUNTING THE FUNCTIONAL COMPONENT.

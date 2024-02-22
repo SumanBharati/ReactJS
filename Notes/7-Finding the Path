@@ -30,6 +30,8 @@ In React if we want to navigate to a new page we should never use the anchor tag
 --> Because the whole page gets refreshed, and we don't want that while working with React. React is primarily used to make Single Page Applications (SPAs). We want to navigate to new page without loading the whole page by using link component provided by react-router-dom.
 Example: <Link to="/about">About</Link>
 
+LINK : We will be using Link component instaed of anchor tag so that our page do not refresh. However we'll still see anchor tag in our DOM, because Link acts as a wrapper over the anchor tag provided by react-router-dom. While working with Link, react-router-dom keeps a track that out component to which we have applied link does not refresh. But we know that the browser or HTML doesn't understand Link as its not a HTML tag but somathing provided by react-router-dom, so it gets converted to anchor tag on compilation.
+
 SPAs: Its a single page, just the components getting interchanged via client-side routing.
 
 There are 2 TYPES OF ROUTING:
@@ -40,3 +42,4 @@ There are 2 TYPES OF ROUTING:
 * Read about GraphQL
 GraphQL - It helps us deal with under fertching and over fetching. It helps to load only the data required in our app. 
 There can be situations when backend sends tons of data and we need to show very few of them, in those situations GraphQL makes our life easier.
+
