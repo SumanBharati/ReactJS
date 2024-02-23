@@ -36,19 +36,19 @@ const Body = () => {
   return mainList.length === 0 ? (
     <Shimmer />
   ) : (
-    <div className="body">
-      <div className="search-filter-container">
-        <div className="search-bar">
+    <div className="body bg-gray-100">
+      <div className="flex items-center justify-between">
+        <div className="search m-4 p-4">
           <input
             type="text"
-            className="search-input"
+            className="border border-solid border-gray-600 rounded-sm"
             value={searchText}
             onChange={(e) => {
               setSearchText(e.target.value);
             }}
           />
           <button
-            className="search-btn"
+            className="px-3 py-1 bg-blue-400 rounded-lg ml-3 text-white"
             onClick={() => {
               console.log("Need to fix this searchBar");
               // const searchedList = mainList.filter((restaurant) => {
@@ -68,13 +68,13 @@ const Body = () => {
             Search
           </button>
         </div>
-        <div className="filter">
-          <button className="filter-btn" onClick={handleClick}>
+        <div className="filter m-4 p-4">
+          <button className="px-3 py-1 bg-gray-500 rounded-lg text-white" onClick={handleClick}>
             Top Rated Restaurants
           </button>
         </div>
       </div>
-      <div className="res-container">
+      <div className="res-container flex flex-wrap justify-start mx-4">
         {mainListCopy.map((restaurantData) => (
           <Link
             className="link"

@@ -1,0 +1,48 @@
+Ways to add CSS to our app:
+1) common index.css style file
+2) Sass and Scss
+3) Styled Components
+4) CSS framework and libraries 
+    - Material UI
+    -  Bootstrap
+    - Chakra UI
+    - Ant Design
+    - TAILWIND CSS : Its not a React thing, it works with various other libraries and frameworks, it generic   
+      for all. It works with normal HTML and JS also.
+
+1) CONFIGURING TAILWIND
+- npm install -D tailwindcss postcss - While installing Tailwind, we can see the command 'npm
+  install -D tailwindcss postcss',  has postCSS too in it.
+  PostCSS is a tool for transforming CSS with JS. 
+  Tailwind CSS behind the scene uses PostCSS
+- npx tailwindcss init - here we are initialising tailwind. 
+  A new tailwind.config.js file is created in our project after this step.
+
+2) Similar CONFIGURE POSTCSS too, by adding '.postcssrc' file on root level of the project and add below mentioned lines in that file,
+{
+  "plugins": {
+    "tailwindcss": {}
+  }
+}
+These lines tell postCSS that we are using tailwind.
+
+*Our Parcel needs this PostCSSrc to read Tailwind CSS.
+
+3) In the tailwind configuration file add the following line, 
+content: ["./src/**/*.{html,js,ts,jsx,tsx}",] - this line tells us that we are using tailwind in the files which are anywhere in the src folder and with the extensions: html, js, jsx, ts, tsx.
+
+
+4) Inside index.css file and add the @tailwind directives for each of Tailwind’s layers,
+    @tailwind base;
+    @tailwind components;
+    @tailwind utilities;
+With this we are done with the tailwind configuration.
+
+
+
+Tailwind CSS is very light-weight.
+Let's say we are only using few CSS in our code out of many present of Tailwind framework, the parcel will make bundle of only the CSS used to load our application.
+Tailwind framework has thousands of CSS classes, but we are not going to load thousands of CSS classes when loading the app, it will only load the CSS that is absolutely required for our app. It is very dynamic.
+Let's say if we have used m-4 thousands of time in our app, it will just import one m-4 class.
+There are CSS frameworks and libraries that just dump their code onto the browser. And all the classes and components they have is into our project. So it keeps the bundle size small.
+Whenever we add a class then only the CSS file is updated.
