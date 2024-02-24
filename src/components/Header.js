@@ -1,11 +1,14 @@
 import logo from '../../Assets/foodAppLogo.jpg';
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link } from 'react-router-dom';
 import useOnlineStatus from '../utils/useOnlineStatus';
+import UserContext from '../utils/UserContext';
 
 const Header = () => {
   const [btnName, setBtnName] = useState("Login");
   const onlineStatus = useOnlineStatus();
+
+  const { loggedInUser } = useContext(UserContext);
 
   return (
     <div className="flex border-2 border-black bg-white">
@@ -21,11 +24,12 @@ const Header = () => {
           <li className='p-2.5 m-2.5 bg-white'><Link className='link' to={"/contact"}>Contact Us</Link></li>
           <li className='p-2.5 m-2.5 bg-white'><Link className='link'>Cart</Link></li>
           <li className='p-2.5 m-2.5 bg-white'><Link className='link' to={"/grocery"}>Grocery</Link></li>
+          {btnName === 'Logout' && <li className='p-2.5 m-2.5 bg-white'>{loggedInUser}</li>}
           <button
-            onClick={() => {
+            onClick={() =>{
               btnName === "Login" ? setBtnName("Logout") : setBtnName("Login");
             }}
-            className='px-4 py-2 m-2.5 bg-orange-400 rounded-md text-white'
+            className='px-4 m-2.5 bg-orange-400 rounded-md text-white'
           >
             {btnName}
           </button>

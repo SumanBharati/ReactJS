@@ -1,0 +1,83 @@
+ Learning about Data Layer and its management.
+
+
+
+ HIGHER ORDER FUNCTIONS : 
+ These are pure JS functions that takes up a components and returns back the same component with some 
+ enhancements.
+
+
+ Controlled and Un-Controlled components
+
+
+ LIFTING THE STATE UP: Sometimes we have to lift the state up fro the child component to parent component, to control the child component.
+ Ex: Accordian expand and collapse feature in this application is controlled from RestaurantMenu (parent) component, the child component here is RestaurntCategory.
+
+
+
+ An important part of React Application is to manage its data.
+ We know UI is very static, it doesn't have a logic of its own. We give some JSX and it remains on that page. UI is a different part and data is a different part in the application.
+ All the React applications have two layers, one is the UI layer and other is the data layer.
+ UI layer is powered by data layer. And the data layer consists of the states, props, all the local variables.
+ If we know how to manage the data layer in our application, our application will be super fast
+
+
+
+ Props Drilling - 
+
+ Uni-directional data flow - 
+
+ CONTEXT API - To avoid props drilling we use context, where our data is kept, and any component can access the data from that context.
+ With Context we are making the data layer more powerful.
+ This is nativel provided to us by React.
+ This is an important way to mange data inside our application.
+
+ How to create a context?
+ createContext() - a utility function to create a context. This comes from react library. And we provide it some information that it holds.
+ Syntax: const UserContext = createContext({
+              loggedInUser: 'Default Name'
+          }); 
+
+ How to use a context?
+ In functional Component:
+ useContext() - its a hook provide by react to us, to use the context we created. It takes the created context as an argument.
+ Syntax: import { useContext } from 'react';
+          import UserContext from 'its path';
+          const { loggedInUser } = useContext(UserContext); 
+
+ In class component:
+ Syntax: import UserContext from 'its path';
+          <UserContext.Consumer>
+              {({ loggedInUser }) => <h1>{loggedInUser}</h1> }
+          </UserContext.Consumer> 
+
+ How to modify context?
+ Syntax: import UserContext from 'its path';
+
+          const App = () => {
+              const [userName, setUserName] = useState('');
+
+              useEffect(() => {
+                  Make an API call
+                  const data = {
+                      name: 'Suman Bharati'
+                  };
+                  setUserName(data.name);
+              }) 
+
+             return (
+                  <UserContext.Provider value={ loggedInUser: userName, setUserName }>
+                      <div className='app'>
+                          <Header />
+                          <Outlet />
+                      </div>
+                  </UserContext.Provider>
+              )
+          } 
+ The modified value will be accessible to anywhere inside the applocation.
+
+
+Should we keep all the data in the context so that we don't require props?
+ We shouldn't do so, only the data which are expected to be used at multiples places in differenr different components, there we should use context. Otherwise we should use props.
+
+So whenever we are working with small to medium level applications Context is of great help, but when our application scales and it starts becoming huge then we can levarage Redux. 
