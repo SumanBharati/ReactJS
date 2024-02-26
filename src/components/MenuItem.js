@@ -1,12 +1,20 @@
+import { useDispatch } from "react-redux";
 import { CDN_URL } from "../utils/constants";
+import { addItem } from "../utils/cartSlice";
 
-const MenuItem = (props) => {
-  const { itemCards } = props.data;
+const MenuItem = ({ itemCards }) => {
+
+  const dispatch = useDispatch();
+
+  const handleAddItem = (menuItem) => {
+    dispatch(addItem(menuItem))
+  }
+
   return (
     <div>
-      {itemCards.map(
+      {itemCards?.map(
         (menuItem) => (
-          <>
+          <div key={menuItem.card.info.id}>
             <div className="flex">
               <div className="w-9/12 m-2 p-2 text-left">
                 <div className="font-semibold text-blue-700">
@@ -25,13 +33,16 @@ const MenuItem = (props) => {
                   src={CDN_URL + menuItem.card.info.imageId}
                   alt="food-image"
                 />
-                <div className="bg-gray-600 border border-gray-400 text-white pl-1 mx-8 w-12 absolute rounded-md">
+                <div
+                  onClick={() => handleAddItem(menuItem)}
+                  className="bg-gray-600 border border-gray-400 text-white pl-1 mx-8 w-12 absolute rounded-md"
+                >
                   Add+
                 </div>
               </div>
             </div>
             <hr />
-          </>
+          </div>
         )
         // menuItem.card.info.name
       )}

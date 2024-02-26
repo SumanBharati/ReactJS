@@ -25,6 +25,7 @@ In the above install command -D stands for dev.
 There are basically 2 types of dependencies, 
 - normal: These are used in production besides other normal uses
 - dev (-D): These are generally required in developement phase, when we are developing our app
+
 Features of Parcel: 
 - Dev Build
 - Local Server

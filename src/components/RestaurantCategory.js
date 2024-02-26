@@ -6,7 +6,9 @@ const RestaurantCategory = (props) => {
   
   const { title } = props.data?.card?.card;
 
-  const { itemCards } = props.data?.card?.card
+  const { itemCards } = props.data?.card?.card;
+  console.log(itemCards);
+  console.log(props.data?.card?.card);
 
   const handleClick = () => {
     props.setShowIndex();
@@ -19,7 +21,7 @@ const RestaurantCategory = (props) => {
         <div className="font-semibold">{title} ({itemCards.length})</div>
         <div>{props.showIndex && !collapseAccordian ? '🔼' : '🔽' }</div>
       </div>
-        {props.showIndex && !collapseAccordian && <MenuItem data={props.data?.card?.card} />}
+        {props.showIndex && !collapseAccordian && <MenuItem itemCards={itemCards} />}
     </div>
   );
 };

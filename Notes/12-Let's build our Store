@@ -1,0 +1,46 @@
+When our application is huge and there are a lot of read and write operations supposed to happen then we use REDUX.
+REDUX is a predictatble state container for JS Apps. REDUX is not a part of React, it's just heavily used with React. And it's not even mandatory if we are working with small or medium scale applications.
+REDUX is seperate library itself. It requires extensive setup process.
+There are other libraries too for managing states, one such is Zustand, which is very light weight and gaining popularity.
+
+Advantages of Redux:
+- easy to manage data because of single store
+- it offers easy debugging
+  The way we have React dev tools for debugging, similarly we have Redux Dev Tools too if we are working with Redux.
+
+There are 2 libraries offered by Redux team:
+- React-Redux: Its kinda bridge between React and Redux. It contains official React bindings for Redux.
+- Redux Toolkit (RTK): This is now the standard way for writing Redux. It overcomes 3 Redux issue,
+                    - Configuration of Redux store was too complicated, it is somewhat easier now
+                    - We had to add too many packages to make Redux do work for us. Now with just 2 packages 
+                      React-Redux and Redux Toolkit our work is done.
+                    - Redux required too much boilerplate code.
+                      Ealier the developers used to copy paste the older code and do modifications to it as per the project need, but now with Redux Toolkit, the code has become short and sweet.
+
+
+
+In our application, we have Header, a logo, cart and many other nav menu options inside header. We have Body, we have Restaurant cards and once clicked we have Restaurant Menus.
+While working with Redux, all the data will be stored in a centralizes store which is nothing but normal JS object which will be huge as it will be storing all the data of our application.
+But is it a good practice to store all the data at one place? Yes it is absolutely fine, but to make it less clumsy, we will slice them up. We can have logically seperated slices, let's say for logged in user information we have User slice, for cart data we have Cart slice.
+Initially these slices can be an empty array, but as we'll move ahead we put data inside it.
+
+_________________                                          ____________________________________
+|    --------   |           ------------                   |          ---------               |
+|    | Cart |---|---------->| Selector |-------------------|--------->|Cart(4)|               |
+|    |Slice |<--|----       ------------                   |          ---------               |
+|    --------   |   |  --------         ----------         |         ------------             |
+|               |   ---| fn() |<--------|dispatch|<--------|---------|Add button|             |
+|    --------   |      |      |         |(action)|         |         ------------             |
+|    | User |   |      --------         ----------         |                                  |
+|    |Slice |   |      Reducer                             |                                  |
+|    --------   |      function                            |                                  |
+|               |                                          |                                  |
+|    --------   |                                          |                                  |
+|    | Menu |   |                                          |                                  |
+|    |Slice |   |                                          |                                  |
+|    --------   |                                          |                                  |
+_________________                                          _____________________________________
+We can't modify the cart slice directly,i.e., we cannot add the data to cart slice directly once clicking on Add button.
+When we click add button, a dispatch action happens which calls a function, and that function then modifies the cart data.
+
+Selector: Used to subscribe a component to the store. In our example, our cart is subscribed of the store.

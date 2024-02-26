@@ -12,8 +12,8 @@ Custom hooks will let us,
 - create more modular code : by extracting extra responsibilty from from a component and putting that into a custom hook, we are making our code more modular.
 - optimize our code
 
-It is RECOMMENDED to use 'use' keyword as a prefix to custum hook names, its not MANDATORY however. Similary its RECOMMENDED to write functional component and its file name starting with capital letter.
-Sometimes our project might have some linter set up and that can through error if we don't follow the recommended way.
+It is RECOMMENDED to use 'use' keyword as a prefix to custom hook names, its not MANDATORY however. Similary its RECOMMENDED to write functional component and its file name starting with capital letter.
+Sometimes our project might have some linter set up and that can throw error if we don't follow the recommended way.
 LINTER is a developer tool that analyzes source code for errors, vulnerabilities, and stylistic issues to improve code quality.
 Code linting is a type of static analysis that is frequently used to find problematic patterns or code that doesn't adhere to certain style guidelines.
 'ESLint' is an open source JavaScript linting utility.
@@ -22,7 +22,7 @@ Code linting is a type of static analysis that is frequently used to find proble
 
 
 
-When we are building large scale applications having thousands of component, the performance of the application will niot be good.
+When we are building large scale applications having thousands of component, the performance of the application will not be good.
 We learned about Parcel, which is a bundler. A bundler basically bundles all our files into one file.
 If we see the dist folder, we will find one JS file for all the JS files. And we are working in development mode where if we see this JS file, it is not compressed or minified, in production the code will be compressed, minified but there too only one JS file will be present.
 If we go onto the browser, we will see all the work is happening with just one JS file. All the code of various components of our application is inside on JS file, which our bundler(Parcel) has created.
